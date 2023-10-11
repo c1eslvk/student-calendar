@@ -87,19 +87,25 @@
                 </v-btn>
                 <v-toolbar-title>{{ selectedEvent.name }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn icon>
-                  <v-icon>mdi-heart</v-icon>
+                <v-btn icon v-if="currentlyEditing !== selectedEvent.id" @click.prevent="editEvent(selectedEvent)">
+                  <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn icon>
-                  <v-icon>mdi-dots-vertical</v-icon>
+                <v-btn icon v-else @click.prevent="updateEvent(selectedEvent)">
+                  <v-icon>mdi-checkbox-marked-circle</v-icon> 
                 </v-btn>
               </v-toolbar>
               <v-card-text>
-                <span v-html="selectedEvent.details"></span>
+                <form v-if="currentlyEditing !== selectedEvent.id">
+                  {{ selectedEvent.details }}
+                </form>
+                <form v-else>
+                  <textarea-autosize v-model="selectedEvent.details" type="text" style="width: 100%" :min-height="100" placeholder="add note">
+                  </textarea-autosize>
+                </form>
               </v-card-text>
               <v-card-actions>
                 <v-btn text color="secondary" @click="selectedOpen = false">
-                  Cancel
+                  Close
                 </v-btn>
               </v-card-actions>
             </v-card>
