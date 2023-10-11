@@ -49,7 +49,7 @@
           </v-toolbar>
         </v-sheet>
 
-        <v-dialog v-model="dialog" max-width="500">
+                <v-dialog v-model="dialog" max-width="500">
           <v-card>
             <v-container>
               <v-form @submit.prevent="addEvent">
@@ -82,8 +82,8 @@
           <v-menu v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x>
             <v-card color="grey lighten-4" min-width="350px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
-                <v-btn icon>
-                  <v-icon>mdi-pencil</v-icon>
+                <v-btn @click="deleteEvent(selectedEvent.id)" icon>
+                  <v-icon>mdi-delete</v-icon>
                 </v-btn>
                 <v-toolbar-title>{{ selectedEvent.name }}</v-toolbar-title>
                 <v-spacer></v-spacer>
